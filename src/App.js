@@ -1,23 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
-
+import Signup from './Components/Signup';
+import Login from './Components/Login';
+import Otp from './Components/Otp';
+// import Otp from './Components/';
+import { Routes, Route } from 'react-router-dom';
+import GameSession from './Components/GameSession';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route exact path='/' Component={() => <Login />} />
+        <Route path='/signup' Component={() => <Signup />} />
+        <Route path='/otp' Component={() => <Otp />} />
+        <Route path='/session' Component={() => <GameSession />} />
+      </Routes>
     </div>
   );
 }
