@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react'
 import NavCmp from './NavCmp';
 import { Accordion, AccordionBody, AccordionHeader, AccordionItem, Button, Card, Form, FormGroup, Input, Label } from 'reactstrap';
+import axios from 'axios';
 
 function Signup() {
   const [ username, setUsername ] = useState("");
@@ -9,6 +10,7 @@ function Signup() {
   const [ email, setEmail ] = useState("");
   const [ goal, setGoal ] = useState("");
   const [open, setOpen] = useState("");
+  const [ name, setName ] = useState("");
   const toggle = (e) => {
     if(e === open){
         setOpen("");
@@ -16,6 +18,26 @@ function Signup() {
     else{
         setOpen(e);
     }
+  }
+  const handleSign = () => {
+    axios.post('http://localhost:3001/user', {
+        email,
+        username,
+        password,
+        name,
+        goal
+    }).then((response) => {
+        if(response.data.message === "User added"){
+            localStorage.setItem('email', username);
+            localStorage.setItem('password', password);
+            window.open("http://localhost:3000/otp", "_self");
+        }
+        else{
+            alert(response.data.message);
+        }
+    }).catch((eror) => {
+        alert(eror.message);
+    });
   }
   return (
     <>
@@ -31,6 +53,16 @@ function Signup() {
                             </div>
                             <div className='col-10 col-md-8'>
                                 <Input placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
+                            </div>
+                        </div>
+                    </FormGroup>
+                    <FormGroup>
+                        <div className='row'>
+                            <div className='col-10 col-md-4'>
+                                <Label><strong>Name : </strong></Label>
+                            </div>
+                            <div className='col-10 col-md-8'>
+                                <Input placeholder='Name' onChange={(e) => setName(e.target.value)} />
                             </div>
                         </div>
                     </FormGroup>
@@ -93,10 +125,10 @@ function Signup() {
                     <FormGroup>
                         <div className='row'>
                             <div className='col-10 col-md-4 m-3'>
-                                <Button className='btn btn-success'>Login</Button>
+                                <Button className='btn btn-success' href="/">Login</Button>
                             </div>
                             <div className='col-10 col-md-4 m-3'>
-                                <Button className='btn btn-danger'>Signup</Button>
+                                <Button className='btn btn-danger' onClick={handleSign}>Signup</Button>
                             </div>
                         </div>
                     </FormGroup>

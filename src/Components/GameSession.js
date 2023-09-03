@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import NavCmp from './NavCmp'
 import { Button, Form, FormGroup } from 'reactstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function GameSession() {
   const [ count, setCount ] = useState(0);
