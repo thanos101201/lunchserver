@@ -10,11 +10,14 @@ function Home() {
   useEffect(() => {
     const user = localStorage.getItem('username');
     axios.get(`http://localhost:3001/session/active/${user}`).then((response) => {
-      if(response.data.data.length > 0){
+      if( response.data.data !== undefined &&  response.data.data.length > 0){
         // alert(response.data.data);
         window.open("http://localhost:3000/session", "_self");
       }
-    })
+      console.log(response.data.data);
+    }).catch((eror) => {
+      alert(eror.message);
+    });
   },[]);
   const handleJoin = () => {
     axios.post('http://localhost:3001/session/join', {

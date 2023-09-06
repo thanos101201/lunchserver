@@ -43,6 +43,9 @@ function NavCmp() {
                 <h1>Lunch Time</h1>
             </NavLink>
         </NavItem>
+        <NavItem>
+          <Button>History</Button>
+        </NavItem>
     </Navbar>
   )
 }

@@ -5,18 +5,51 @@ import axios from 'axios';
 import { Accordion, AccordionBody, AccordionHeader, AccordionItem, Label } from 'reactstrap';
 function SessionList() {
     const [sessions, setSession] = useState([]);
-    // useEffect(() => {
-    //     axios.get('/session').then((response) => {
-    //         if(response.data.message === 'Session list'){
-    //             setSession(response.data.data);
-    //         }
-    //         else{
-    //             setSession([]);
-    //         }
-    //     }).catch((eror) => {
-    //         alert(eror.message);
-    //     })
-    // }, []);
+    const [ open, setOpen ] = useState("");
+
+    const toggle = (e) => {
+        if(open === e){
+            setOpen("");
+        }
+        else{
+            setOpen(e);
+        }
+    }
+    useEffect(() => {
+        if(typeof localStorage !== 'undefined'){
+            const user = localStorage.getItem('username');
+            console.log(user);
+            axios.get(`http://localhost:3001/session/active/${user}`).then((response) => {
+                if(response.data.message === 'Session is here'){
+                    console.log(response.data.data);
+                    setSession(response.data.data);
+                }
+            }).catch((eror) => {
+                alert(eror.message);
+            });
+        }
+    }, []);
+    const renderScores = (session) => {
+        if(session.scores.length === 0){
+            return(
+                <div></div>
+            );
+        }
+        else{
+            return Object.keys(session.scores).map((e,key) => {
+                return(
+                    <div className='row d-flex justify-content-center'>
+                        <div className='col-12 col-md-8 d-flex align-items-center'>
+                            <Label><strong>{e} :</strong></Label>
+                        </div>
+                        <div className='col-12 col-md-3 d-flex align-items-center'>
+                            <Label><strong>{session.scores[e]}  </strong></Label>
+                        </div>
+                    </div>
+                );
+            })
+        }
+    }
     const renderAccordion = () => {
         if(sessions.length === 0){
             return <div></div>
@@ -27,17 +60,22 @@ function SessionList() {
                 return(
                         <AccordionItem key={key}>
                             <AccordionHeader targetId={cnt}>
-                                {e._id}
+                                <div className='row d-flex justify-content-center'>
+                                    <div className='col-12 d-flex align-items-center'>
+                                        <h4>{e.date}</h4>
+                                    </div>
+                                </div>
                             </AccordionHeader>
                             <AccordionBody accordionId={cnt}>
                                 <div className='row d-flex justify-content-center'>
-                                    <div className='col-12 col-md-3 d-flex align-items-center'>
-                                        <Label><strong>{localStorage.getItem('username')} : </strong></Label>
+                                    <div className='col-12 col-md-8 d-flex align-items-center'>
+                                        <Label><strong>Session Id :</strong></Label>
                                     </div>
                                     <div className='col-12 col-md-3 d-flex align-items-center'>
-                                        <Label><strong>{e.socres.localStorage.getItem('username')} : </strong></Label>
+                                        <Label><strong>{e._id}  </strong></Label>
                                     </div>
                                 </div>
+                                {renderScores(e)}
                             </AccordionBody>
                         </AccordionItem>
                 );
@@ -49,8 +87,8 @@ function SessionList() {
         <NavCmp />
         <div className='container'>
             <div className='row d-flex justify-content-center'>
-                <div className='col-12 col-md-8 d-flex align-items-center'>
-                    <Accordion className='shadow'>
+                <div className='col-12'>
+                    <Accordion toggle={toggle} open={open} className='shadow'>
                         {renderAccordion()}
                     </Accordion>
                 </div>

@@ -7,6 +7,7 @@ import Otp from './Components/Otp';
 import { Routes, Route } from 'react-router-dom';
 import GameSession from './Components/GameSession';
 import Home from './Components/Home';
+import SessionList from './Components/SessionList';
 function App() {
   return (
     <div>
@@ -16,6 +17,7 @@ function App() {
         <Route path='/otp' Component={() => <Otp />} />
         <Route path='/session' Component={() => <GameSession />} />
         <Route path='/home' Component={() => <Home />} />
+        <Route path='/history' Component={() => <SessionList />} />
       </Routes>
     </div>
   );
