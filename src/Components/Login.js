@@ -34,21 +34,29 @@ function Login() {
         alert(eror.message);
     })
   }
+  
+
+////////
+
+
   return (
     <div style={{
         backgroundImage: `url(${Food})`,  // Set the background image using the imported variable
         backgroundSize: 'cover',           // Cover the entire container
         backgroundPosition: 'center',      // Center the background image
         backgroundRepeat: 'no-repeat',     // Do not repeat the image
-        height: '100vh',
-        backdropFilter: 'blur(150px)',
-        opacity: 0.8,
-        zIndex: -1
+        height: '100vh' // Add this to make z-index work
     }}>
     <NavCmp />
     <div className='container'>
         <div className='row d-flex justify-content-center'>
-            <div className='col-10 d-flex align-items-center shadow'>
+            <div className='col-10 m-4 d-flex align-items-center shadow' style={{
+                background: 'rgba(255, 255, 255, 0.2)', // Semi-transparent white background
+                padding: '20px',
+                borderRadius: '10px',
+                backdropFilter: 'blur(10px)', // Adjust the blur amount
+                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Add a shadow
+            }}>
                 <Form className='m-4'>
                     <FormGroup>
                         <div className='row'>

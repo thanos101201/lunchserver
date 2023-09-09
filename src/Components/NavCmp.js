@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState } from 'react'
 import { Button, Nav, Navbar, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, Label, Input } from 'reactstrap';
-function NavCmp() {
+function NavCmp(props) {
   const [ invite, setInvite ] = useState(false);
   const [ join, setJoin ] = useState(false);
   const [ id, setId ] = useState("");
@@ -44,7 +44,7 @@ function NavCmp() {
             </NavLink>
         </NavItem>
         <NavItem>
-          <Button>History</Button>
+          <Button className='mx-2' href={`/${props.path}`}>{props.name}</Button>
         </NavItem>
     </Navbar>
   )
