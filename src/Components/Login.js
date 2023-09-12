@@ -8,7 +8,7 @@ function Login() {
     useEffect(() => {
         const user = localStorage.getItem('username');
         if(user != undefined){
-          window.open("http://localhost:3000/home", "_self");
+          window.open("https://lunchtime-coral.vercel.app/home", "_self");
         }
       }, []);
     const [ username, setUsername ] = useState("");
@@ -31,7 +31,7 @@ function Login() {
             //alert(response.data.message);
             localStorage.setItem('username', response.data.data[0].username);
             localStorage.setItem('password', password);
-            window.open("http://localhost:3000/home", "_self");
+            window.open("https://lunchtime-coral.vercel.app/home", "_self");
         }
         else{
             //alert(response.data.message);
