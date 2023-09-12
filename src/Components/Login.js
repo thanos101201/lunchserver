@@ -1,10 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react'
 import NavCmp from './NavCmp';
-import { Button, Card, Form, FormGroup, Input, Label } from 'reactstrap';
+import { Button, Card, Form, FormGroup, Input, Label, NavItem, NavLink, Navbar } from 'reactstrap';
 import axios from 'axios';
 import Food from '../assets/food.jpeg';
 function Login() {
+    useEffect(() => {
+        const user = localStorage.getItem('username');
+        if(user != undefined){
+          window.open("http://localhost:3000/home", "_self");
+        }
+      }, []);
     const [ username, setUsername ] = useState("");
     const [ password, setPassword ] = useState("");
     
@@ -22,16 +28,16 @@ function Login() {
         password: password
     }).then((response) => {
         if(response.data.message === "User can proceed"){
-            alert(response.data.message);
+            //alert(response.data.message);
             localStorage.setItem('username', response.data.data[0].username);
             localStorage.setItem('password', password);
             window.open("http://localhost:3000/home", "_self");
         }
         else{
-            alert(response.data.message);
+            //alert(response.data.message);
         }
     }).catch((eror) => {
-        alert(eror.message);
+        //alert(eror.message);
     })
   }
   
@@ -47,15 +53,21 @@ function Login() {
         backgroundRepeat: 'no-repeat',     // Do not repeat the image
         height: '100vh' // Add this to make z-index work
     }}>
-    <NavCmp />
+    <Navbar>
+        <NavItem>
+            <NavLink>
+                <h1>Lunch Time</h1>
+            </NavLink>
+        </NavItem>
+    </Navbar>
     <div className='container'>
         <div className='row d-flex justify-content-center'>
             <div className='col-10 m-4 d-flex align-items-center shadow' style={{
-                background: 'rgba(255, 255, 255, 0.2)', // Semi-transparent white background
+                background: 'rgba(255, 255, 255, 0.2)',
                 padding: '20px',
                 borderRadius: '10px',
-                backdropFilter: 'blur(10px)', // Adjust the blur amount
-                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Add a shadow
+                backdropFilter: 'blur(10px)',
+                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
             }}>
                 <Form className='m-4'>
                     <FormGroup>

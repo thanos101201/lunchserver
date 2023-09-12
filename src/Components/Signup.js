@@ -1,8 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react'
 import NavCmp from './NavCmp';
-import { Accordion, AccordionBody, AccordionHeader, AccordionItem, Button, Card, Form, FormGroup, Input, Label } from 'reactstrap';
+import { Accordion, AccordionBody, AccordionHeader, AccordionItem, Button, Card, Form, FormGroup, Input, Label, NavItem, NavLink, Navbar } from 'reactstrap';
 import axios from 'axios';
+import Food from '../assets/food.jpeg';
 
 function Signup() {
   const [ username, setUsername ] = useState("");
@@ -33,18 +34,42 @@ function Signup() {
             window.open("http://localhost:3000/otp", "_self");
         }
         else{
-            alert(response.data.message);
+            // alert(response.data.message);
         }
     }).catch((eror) => {
-        alert(eror.message);
+        console.log(eror);
+        if(eror.response.status === 400){
+            alert("Username already registered");
+        }
     });
   }
   return (
-    <>
-    <NavCmp />
-    <div className='container'>
+    <div style={{
+        backgroundImage: `url(${Food})`,  // Set the background image using the imported variable
+        backgroundSize: 'cover',           // Cover the entire container
+        backgroundPosition: 'center',      // Center the background image
+        backgroundRepeat: 'no-repeat',     // Do not repeat the image
+        height: '100vh' // Add this to make z-index work
+    }}>
+    <Navbar>
+        <NavItem>
+            <NavLink>
+                <h1>Lunch Time</h1>
+            </NavLink>
+        </NavItem>
+        <NavItem>
+            <Button className='btn btn-success'>Login</Button>
+        </NavItem>
+    </Navbar>
+    <div className='container pb-5'  style={{
+                background: 'rgba(255, 255, 255, 0.2)',
+                padding: '20px',
+                borderRadius: '10px',
+                backdropFilter: 'blur(10px)',
+                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            }}>
         <div className='row d-flex justify-content-center'>
-            <div className='col-10 d-flex align-items-center'>
+            <div className='col-10 d-flex align-items-center mt-5 ml-3'>
                 <Form>
                     <FormGroup>
                         <div className='row'>
@@ -136,7 +161,7 @@ function Signup() {
             </div>
         </div>
     </div>
-    </>
+    </div>
   )
 }
 

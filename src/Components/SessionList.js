@@ -5,6 +5,12 @@ import axios from 'axios';
 import Food from '../assets/food.jpeg';
 import { Accordion, AccordionBody, AccordionHeader, AccordionItem, Card, CardBody, CardHeader, Label } from 'reactstrap';
 function SessionList() {
+    useEffect(() => {
+        const user = localStorage.getItem('username');
+        if(user === undefined){
+          window.open("http://localhost:3000", "_self");
+        }
+      }, []);
     const [sessions, setSession] = useState([]);
     const [ open, setOpen ] = useState("");
 
@@ -20,8 +26,8 @@ function SessionList() {
         if(typeof localStorage !== 'undefined'){
             const user = localStorage.getItem('username');
             console.log(user);
-            axios.get(`http://localhost:3001/session/active/${user}`).then((response) => {
-                if(response.data.message === 'Session is here'){
+            axios.get(`http://localhost:3001/sesions/${user}`).then((response) => {
+                if(response.data.message === 'Session history is here'){
                     console.log(response.data.data);
                     setSession(response.data.data);
                 }
@@ -94,7 +100,7 @@ function SessionList() {
         else{
             return sessions.map((e,key) => {
                 return(
-                    <div className='col-12 col-md-4'>
+                    <div className='col-12 col-md-4 m-1'>
                         <Card key={key} className='shadow' style={{
                             background: 'rgba(255, 255, 255, 0.2)',
                             padding: '20px',
@@ -132,6 +138,8 @@ function SessionList() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
         height: '100vh'
     }}>
         <NavCmp name={'Home'} path={'home'} />

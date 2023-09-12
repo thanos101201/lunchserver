@@ -5,6 +5,12 @@ import NavCmp from './NavCmp';
 import axios from 'axios';
 import Food from '../assets/food.jpeg';
 function Home() {
+  useEffect(() => {
+    const user = localStorage.getItem('username');
+    if(user === undefined){
+      window.open("http://localhost:3000", "_self");
+    }
+  }, []);
   const [ join, setJoin ] = useState(false);
   const [ create, setCreate ] = useState(false);
   const [ user, setUser ] = useState([]);
@@ -16,17 +22,22 @@ function Home() {
     const user = localStorage.getItem('username');
     axios.get(`http://localhost:3001/session/active/${user}`).then((response) => {
       if( response.data.data !== undefined &&  response.data.data.length > 0){
-        setSessionId(response.data.data[0]._id)
-        setRedirect(true);
+        setSessionId(response.data.data[0]._id);
+        if(Object.keys(response.data.data[0].scores).length === 1){
+          alert("Invite at least one more friend in order to continue to the session");
+        }
+        else{
+          setRedirect(true);
+        }
         // window.open("http://localhost:3000/session", "_self");
       }
       console.log(response.data.data);
     }).catch((eror) => {
-      alert(eror.message);
+      //alert(eror.message);
     });
   },[]);
   useEffect(() => {
-    axios.get('http://localhost:3001/user/users').then((response) => {
+    axios.get('http://localhost:3001/users').then((response) => {
       if(response.data.message === 'User is here'){
         if(response.data.data.length > 0){
           let dt = response.data.data.filter((e) => {
@@ -42,7 +53,7 @@ function Home() {
         alert(response.data.message);
       }
     }).catch((eror) => {
-      alert(eror.message);
+      //alert(eror.message);
     })
   }, []);
   const handleJoin = () => {
@@ -50,14 +61,14 @@ function Home() {
       username: localStorage.getItem('username'),
       id: id
     }).then((response) => {
-      if(response.data.message === 'Session joined'){
+      if(response.data.message === 'Joined session'){
         window.open("http://localhost:3000/session", "_self");
       }
       else if(response.data.message === 'Session is full'){
         alert('Session is full');
       }
     }).catch((eror) => {
-      alert(eror.message);
+      //alert(eror.message);
     });
   }
   const handleCreate = () => {
@@ -68,7 +79,7 @@ function Home() {
         window.open("http://localhost:3000/session", "_self");
       }
     }).catch((eror) => {
-      alert(eror.message);
+      //alert(eror.message);
     });
   }
   const renderUser = () => {
@@ -101,7 +112,7 @@ function Home() {
                     alert(response.data.message);
                   }
                 }).catch((eror) => {
-                  alert(eror.message);
+                  //alert(eror.message);
                 })
               }}>Invite</Button>
             </div>

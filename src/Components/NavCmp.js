@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState } from 'react'
-import { Button, Nav, Navbar, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, Label, Input } from 'reactstrap';
+import React, { useState, useEffect } from 'react'
+import { Button, Nav, Navbar, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, Label, Input, ButtonGroup } from 'reactstrap';
 function NavCmp(props) {
   const [ invite, setInvite ] = useState(false);
   const [ join, setJoin ] = useState(false);
@@ -44,7 +44,14 @@ function NavCmp(props) {
             </NavLink>
         </NavItem>
         <NavItem>
-          <Button className='mx-2' href={`/${props.path}`}>{props.name}</Button>
+          <ButtonGroup>
+            <Button className='btn btn-info m-1' href={`/${props.path}`}>{props.name}</Button>
+            <Button className='btn btn-danger m-1' onClick={() => {
+              localStorage.removeItem('username', undefined);
+              localStorage.removeItem('password', undefined);
+              window.open("http://localhost:3000", "_self");
+            }}>Log Out</Button>
+          </ButtonGroup>
         </NavItem>
     </Navbar>
   )

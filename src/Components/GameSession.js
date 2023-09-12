@@ -8,10 +8,23 @@ import Food from '../assets/food.jpeg';
 function GameSession() {
     useEffect(() => {
         const user = localStorage.getItem('username');
+        //alert(window.path);
+        if(user === null && window.path !== '/signup'){
+          window.open("http://localhost:3000", "_self");
+        }
+      }, []);
+    useEffect(() => {
+        const user = localStorage.getItem('username');
         axios.get(`http://localhost:3001/session/active/${user}`).then(async (response) => {
             if(response.data.data !== undefined && response.data.data.length > 0){
+                if(Object.keys(response.data.data[0].scores).length === 1){
+                    window.open("http://localhost:3001/home","_self");
+                }
+                if(response.data.data[0].counts[user] >= 9){
+                    window.open("http://localhost:3000/history","_self");
+                }
                 setSessionId(response.data.data[0]._id);
-                setCount(response.data.data[0].count);
+                setCount(response.data.data[0].counts[user]);
                 if(response.data.data[0].count >= 9){
                     window.open("http://localhost:3000/history", "_self");
                 }
@@ -24,14 +37,14 @@ function GameSession() {
                             setGoal(parseInt(response3.data.data.goal));
                         }
                     }).catch((eror3) => {
-                        alert(eror3.message);
+                        //alert(eror3.message);
                     });
                 }).catch((er2) => {
-                    alert(er2.message);
+                    //alert(er2.message);
                 });
             }
         }).catch((eror) => {
-            alert(eror.message);
+            //alert(eror.message);
         });
     }, []);
   const [ count, setCount ] = useState(0);
@@ -43,6 +56,9 @@ function GameSession() {
   const [ option3, setOption3 ] = useState({ name: "Option 3" });
   const updatePoints = async() => {
     let scr = 2;
+    if(count >= 9){
+        window.open("http://localhost:3000/history", "_self");
+    }
     let ar = [ option1.score[goal], option2.score[goal], option3.score[goal]]
     ar.sort((a,b) => a-b);
     if(score === ar[1]){
@@ -62,10 +78,10 @@ function GameSession() {
             setOption3(response.data.data[2]);
         }
         else{
-            alert(response.data.message);
+            //alert(response.data.message);
         }
     }).catch((eror) => {
-        alert(eror.message);
+        //alert(eror.message);
     })
   }
   const renderNext = () => {
@@ -92,7 +108,7 @@ function GameSession() {
         backgroundImage: `url(${Food})`,  // Set the background image using the imported variable
         backgroundSize: 'cover',           // Cover the entire container
         backgroundPosition: 'center',      // Center the background image
-        backgroundRepeat: 'no-repeat',     // Do not repeat the image
+        backgroundRepeat: 'no-repeat',
         height: '100vh' // Add this to make z-index work
     }}>
     <NavCmp name={'History'} path={'history'} />
