@@ -23,7 +23,7 @@ function Login() {
     }, []);
   const handleLogin = (username, password) => {
     console.log("username :- "+username);
-    axios.post('http://localhost:3001/user/login', {
+    axios.post('https://lunchserver-tau.vercel.app/user/login', {
         username: username,
         password: password
     }).then((response) => {

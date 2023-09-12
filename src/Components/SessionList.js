@@ -26,7 +26,7 @@ function SessionList() {
         if(typeof localStorage !== 'undefined'){
             const user = localStorage.getItem('username');
             console.log(user);
-            axios.get(`http://localhost:3001/sesions/${user}`).then((response) => {
+            axios.get(`https://lunchserver-tau.vercel.app/sesions/${user}`).then((response) => {
                 if(response.data.message === 'Session history is here'){
                     console.log(response.data.data);
                     setSession(response.data.data);

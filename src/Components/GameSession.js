@@ -15,10 +15,10 @@ function GameSession() {
       }, []);
     useEffect(() => {
         const user = localStorage.getItem('username');
-        axios.get(`http://localhost:3001/session/active/${user}`).then(async (response) => {
+        axios.get(`https://lunchserver-tau.vercel.app/session/active/${user}`).then(async (response) => {
             if(response.data.data !== undefined && response.data.data.length > 0){
                 if(Object.keys(response.data.data[0].scores).length === 1){
-                    window.open("http://localhost:3001/home","_self");
+                    window.open("https://lunchserver-tau.vercel.app/home","_self");
                 }
                 if(response.data.data[0].counts[user] >= 9){
                     window.open("http://localhost:3000/history","_self");
@@ -28,11 +28,11 @@ function GameSession() {
                 if(response.data.data[0].count >= 9){
                     window.open("http://localhost:3000/history", "_self");
                 }
-                axios.get(`http://localhost:3001/session/question/${response.data.data[0].restaurantName}`).then((response2) => {
+                axios.get(`https://lunchserver-tau.vercel.app/session/question/${response.data.data[0].restaurantName}`).then((response2) => {
                     setOption1(response2.data.data[0]);
                     setOption2(response2.data.data[1]);
                     setOption3(response2.data.data[2]);
-                    axios.get(`http://localhost:3001/user/${user}`).then((response3) => {
+                    axios.get(`https://lunchserver-tau.vercel.app/user/${user}`).then((response3) => {
                         if(response3.data.status === 200 && response3.data.message === 'User is here'){
                             setGoal(parseInt(response3.data.data.goal));
                         }
@@ -67,7 +67,7 @@ function GameSession() {
     else if(score === ar[2]){
         scr = 10;
     }
-    return axios.put('http://localhost:3001/session', {
+    return axios.put('https://lunchserver-tau.vercel.app/session', {
         user: localStorage.getItem('username'),
         score: scr,
         session: sessionId

@@ -20,7 +20,7 @@ function Home() {
   const [ sessionId, setSessionId ] = useState("");
   useEffect(() => {
     const user = localStorage.getItem('username');
-    axios.get(`http://localhost:3001/session/active/${user}`).then((response) => {
+    axios.get(`https://lunchserver-tau.vercel.app/session/active/${user}`).then((response) => {
       if( response.data.data !== undefined &&  response.data.data.length > 0){
         setSessionId(response.data.data[0]._id);
         if(Object.keys(response.data.data[0].scores).length === 1){
@@ -37,7 +37,7 @@ function Home() {
     });
   },[]);
   useEffect(() => {
-    axios.get('http://localhost:3001/users').then((response) => {
+    axios.get('https://lunchserver-tau.vercel.app/users').then((response) => {
       if(response.data.message === 'User is here'){
         if(response.data.data.length > 0){
           let dt = response.data.data.filter((e) => {
@@ -57,7 +57,7 @@ function Home() {
     })
   }, []);
   const handleJoin = () => {
-    axios.post('http://localhost:3001/session/join', {
+    axios.post('https://lunchserver-tau.vercel.app/session/join', {
       username: localStorage.getItem('username'),
       id: id
     }).then((response) => {
@@ -72,7 +72,7 @@ function Home() {
     });
   }
   const handleCreate = () => {
-    axios.post('http://localhost:3001/session', {
+    axios.post('https://lunchserver-tau.vercel.app/session', {
       username: localStorage.getItem('username')
     }).then((response) => {
       if(response.data.message === 'Session created'){
@@ -99,7 +99,7 @@ function Home() {
             </div>
             <div className='col-12 col-md-3 d-flex align-items-center'>
               <Button onClick={() => {
-                axios.post('http://localhost:3001/session/invite', {
+                axios.post('https://lunchserver-tau.vercel.app/session/invite', {
                   user1: localStorage.getItem('username'),
                   user2: e.username,
                   email: e.email,

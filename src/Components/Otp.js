@@ -13,7 +13,7 @@ function Otp() {
                 email: email
             }
         }
-        axios.get('http://localhost:3001/otp', config).then((response) => {
+        axios.get('https://lunchserver-tau.vercel.app/otp', config).then((response) => {
         console.log(response);    
         if(response.data.message === "Otp is send"){
                 setOpen(true);
@@ -28,7 +28,7 @@ function Otp() {
         })
     }
     const handleVerfiy = () => {
-        axios.post('http://localhost:3001/otp', {
+        axios.post('https://lunchserver-tau.vercel.app/otp', {
             email: email,
             otpNum: otp
         }).then((response) => {
