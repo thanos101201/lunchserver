@@ -21,7 +21,7 @@ function Signup() {
     }
   }
   const handleSign = () => {
-    axios.post('https://lunchserver-tau.vercel.app/user', {
+    axios.post('https://lunchtime-bice.vercel.app/user', {
         email,
         username,
         password,
