@@ -31,7 +31,7 @@ function Signup() {
         if(response.data.message === "User added"){
             localStorage.setItem('email', username);
             localStorage.setItem('password', password);
-            window.open("https://lunchtime-coral.vercel.app/otp", "_self");
+            window.open("https://lunchserver-two.vercel.app/otp", "_self");
         }
         else{
             // alert(response.data.message);

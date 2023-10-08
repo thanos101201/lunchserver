@@ -8,7 +8,7 @@ function SessionList() {
     useEffect(() => {
         const user = localStorage.getItem('username');
         if(user === undefined){
-          window.open("https://lunchtime-coral.vercel.app", "_self");
+          window.open("https://lunchserver-two.vercel.app", "_self");
         }
       }, []);
     const [sessions, setSession] = useState([]);

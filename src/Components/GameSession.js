@@ -10,7 +10,7 @@ function GameSession() {
         const user = localStorage.getItem('username');
         //alert(window.path);
         if(user === null && window.path !== '/signup'){
-          window.open("https://lunchtime-coral.vercel.app", "_self");
+          window.open("https://lunchserver-two.vercel.app", "_self");
         }
       }, []);
     useEffect(() => {
@@ -21,12 +21,12 @@ function GameSession() {
                     window.open("https://lunchserver-tau.vercel.app/home","_self");
                 }
                 if(response.data.data[0].counts[user] >= 9){
-                    window.open("https://lunchtime-coral.vercel.app/history","_self");
+                    window.open("https://lunchserver-two.vercel.app/history","_self");
                 }
                 setSessionId(response.data.data[0]._id);
                 setCount(response.data.data[0].counts[user]);
                 if(response.data.data[0].count >= 9){
-                    window.open("https://lunchtime-coral.vercel.app/history", "_self");
+                    window.open("https://lunchserver-two.vercel.app/history", "_self");
                 }
                 axios.get(`https://lunchserver-tau.vercel.app/session/question/${response.data.data[0].restaurantName}`).then((response2) => {
                     setOption1(response2.data.data[0]);
@@ -57,7 +57,7 @@ function GameSession() {
   const updatePoints = async() => {
     let scr = 2;
     if(count >= 9){
-        window.open("https://lunchtime-coral.vercel.app/history", "_self");
+        window.open("https://lunchserver-two.vercel.app/history", "_self");
     }
     let ar = [ option1.score[goal], option2.score[goal], option3.score[goal]]
     ar.sort((a,b) => a-b);

@@ -8,7 +8,7 @@ function Home() {
   useEffect(() => {
     const user = localStorage.getItem('username');
     if(user === undefined){
-      window.open("https://lunchtime-coral.vercel.app", "_self");
+      window.open("https://lunchserver-two.vercel.app", "_self");
     }
   }, []);
   const [ join, setJoin ] = useState(false);
@@ -29,7 +29,7 @@ function Home() {
         else{
           setRedirect(true);
         }
-        // window.open("https://lunchtime-coral.vercel.app/session", "_self");
+        // window.open("https://lunchserver-two.vercel.app/session", "_self");
       }
       console.log(response.data.data);
     }).catch((eror) => {
@@ -62,7 +62,7 @@ function Home() {
       id: id
     }).then((response) => {
       if(response.data.message === 'Joined session'){
-        window.open("https://lunchtime-coral.vercel.app/session", "_self");
+        window.open("https://lunchserver-two.vercel.app/session", "_self");
       }
       else if(response.data.message === 'Session is full'){
         alert('Session is full');
@@ -76,7 +76,7 @@ function Home() {
       username: localStorage.getItem('username')
     }).then((response) => {
       if(response.data.message === 'Session created'){
-        window.open("https://lunchtime-coral.vercel.app/session", "_self");
+        window.open("https://lunchserver-two.vercel.app/session", "_self");
       }
     }).catch((eror) => {
       //alert(eror.message);

@@ -49,7 +49,7 @@ function NavCmp(props) {
             <Button className='btn btn-danger m-1' onClick={() => {
               localStorage.removeItem('username', undefined);
               localStorage.removeItem('password', undefined);
-              window.open("https://lunchtime-coral.vercel.app", "_self");
+              window.open("https://lunchserver-two.vercel.app", "_self");
             }}>Log Out</Button>
           </ButtonGroup>
         </NavItem>

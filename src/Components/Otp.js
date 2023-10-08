@@ -33,7 +33,7 @@ function Otp() {
             otpNum: otp
         }).then((response) => {
             if(response.data.message === "Otp is verified"){
-                window.open("https://lunchtime-coral.vercel.app/home", "_self");
+                window.open("https://lunchserver-two.vercel.app/home", "_self");
             }
             else{
                 //alert(response.data.message);
