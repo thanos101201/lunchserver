@@ -89,7 +89,7 @@ function Home() {
       }
     }).catch((eror) => {
       console.log(eror);
-      if(eror.response.data.message === "Session already played"){
+      if(eror.response.data.message === "Session already present"){
         window.open("https://lunchserver-two.vercel.app/history", "_self");
       }
     });
