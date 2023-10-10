@@ -67,6 +67,9 @@ function Home() {
       else if(response.data.message === 'Session is full'){
         alert('Session is full');
       }
+      else if(response.data.message === 'Session already played'){
+        window.open("https://lunchserver-two.vercel.app/history", "_self");
+      }
     }).catch((eror) => {
       //alert(eror.message);
     });
