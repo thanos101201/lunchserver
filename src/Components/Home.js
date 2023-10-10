@@ -78,6 +78,9 @@ function Home() {
       if(response.data.message === 'Session created'){
         window.open("https://lunchserver-two.vercel.app/session", "_self");
       }
+      else if(response.data.message === "Session already present"){
+        window.open("https://lunchserver-two.vercel.app/history", "_self");
+      }
     }).catch((eror) => {
       //alert(eror.message);
     });
