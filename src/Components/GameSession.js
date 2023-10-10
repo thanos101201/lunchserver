@@ -18,7 +18,7 @@ function GameSession() {
         axios.get(`https://lunchtime-bice.vercel.app/session/active/${user}`).then(async (response) => {
             if(response.data.data !== undefined && response.data.data.length > 0){
                 if(Object.keys(response.data.data[0].scores).length === 1){
-                    window.open("https://lunchtime-bice.vercel.app/home","_self");
+                    window.open("https://lunchserver-two.vercel.app/home","_self");
                 }
                 if(response.data.data[0].counts[user] >= 9){
                     window.open("https://lunchserver-two.vercel.app/history","_self");
