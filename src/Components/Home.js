@@ -71,7 +71,9 @@ function Home() {
         window.open("https://lunchserver-two.vercel.app/history", "_self");
       }
     }).catch((eror) => {
-      //alert(eror.message);
+      if(eror.response.data.message === "Session already played"){
+        window.open("https://lunchserver-two.vercel.app/history", "_self");
+      }
     });
   }
   const handleCreate = () => {
@@ -85,7 +87,9 @@ function Home() {
         window.open("https://lunchserver-two.vercel.app/history", "_self");
       }
     }).catch((eror) => {
-      //alert(eror.message);
+      if(eror.response.data.message === "Session already played"){
+        window.open("https://lunchserver-two.vercel.app/history", "_self");
+      }
     });
   }
   const renderUser = () => {
